@@ -5,6 +5,7 @@ import { Card, CardWrapper, ContentContainer } from './Home.style';
 import Header from 'components/HomeCardLayout/Header';
 import Body from 'components/HomeCardLayout/Body';
 import Footer from 'components/HomeCardLayout/Footer';
+import { AirplaneIcon } from 'icons';
 
 const Home = () => {
   const { data: tours, error, isFetching } = useTours();
@@ -13,13 +14,16 @@ const Home = () => {
 
   return (
     <ContentContainer>
+      {isFetching && (
+        <div className='flex justify-center items-center mt-10'>
+          <AirplaneIcon className='animate-spin text-gray-400 h-64 w-64' />
+        </div>
+      )}
       <CardWrapper>
-        {isFetching ? (
-          <div>LOADING ...</div>
-        ) : (
+        {tours &&
           tours.map((tour) => (
             <Card key={tour.id}>
-              <div className='border border-gray-600 rounded-md shadow-2xl overflow-hidden'>
+              <div className='border border-gray-800 hover:border-gray-600 rounded-md shadow-2xl overflow-hidden'>
                 <Header imageCover={tour.imageCover} name={tour.name} />
                 <Body tour={tour} />
                 <Footer
@@ -29,8 +33,7 @@ const Home = () => {
                 />
               </div>
             </Card>
-          ))
-        )}
+          ))}
       </CardWrapper>
     </ContentContainer>
   );

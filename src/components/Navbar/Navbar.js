@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import tw, { styled } from 'twin.macro';
 
-const NavWrapper = tw.div`flex justify-between items-center py-4 px-6 text-gray-300 border-b-2 border-gray-600`;
+const NavWrapper = tw.div`flex justify-around items-center py-4 px-6 text-gray-300 border-b-2 border-gray-600`;
 const ButtonWrap = tw.button`block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900`;
 const DropDown = styled.div`
   ${tw`transition ease-out duration-300 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg`}
@@ -13,11 +13,11 @@ const Navbar = () => {
 
   return (
     <NavWrapper>
-      <div className='tracking-widest font-bold'>NATOURS</div>
+      <div className='tracking-widest font-bold select-none'>NATOURS</div>
       <div>
         <img
           className='h-10 w-10'
-          src={require('assets/images/icon.png')}
+          src={require('assets/images/aircraft.png')}
           alt='icon'
         />
       </div>
