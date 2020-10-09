@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import useSignUp from 'hooks/useSignup';
 import { signUpSchema } from 'utils/authValidation';
-import { InputField } from './Signup.style';
+import { InputField } from 'utils/auth.style';
 
 const Signup = () => {
   const [signUp, signUpInfo] = useSignUp();

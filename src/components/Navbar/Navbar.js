@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
 import { AuthContext } from 'context/authContext';
+import useMe from 'hooks/useMe';
 
 const NavWrapper = tw.div`flex justify-around items-center py-4 px-6 text-gray-300 border-b-2 border-gray-600`;
 const ButtonWrap = tw.button`block w-full text-left px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900`;
@@ -11,10 +12,9 @@ const DropDown = styled.div`
 `;
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(true);
-
-  // console.log('FROM NAVBAR', user.id);
+  const { data } = useMe();
 
   const AuthLinks = (
     <div className='flex'>
@@ -76,7 +76,7 @@ const Navbar = () => {
                     src='https://robohash.org/ddd?set=set4'
                     alt='DP'
                   />
-                  Denys Don
+                  {data?.name}
                   <svg
                     className='-mr-1 ml-2 h-5 w-5'
                     xmlns='http://www.w3.org/2000/svg'
@@ -106,7 +106,7 @@ const Navbar = () => {
             >
               <ButtonWrap role='menuitem'>Account settings</ButtonWrap>
               <form>
-                <ButtonWrap type='submit' role='menuitem'>
+                <ButtonWrap onClick={logout} type='submit' role='menuitem'>
                   Sign out
                 </ButtonWrap>
               </form>
