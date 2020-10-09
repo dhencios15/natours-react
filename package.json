@@ -5,18 +5,22 @@
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
+    "@hookform/resolvers": "^1.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@windmill/react-ui": "^0.3.2",
     "axios": "^0.20.0",
     "dayjs": "^1.9.1",
+    "jwt-decode": "^3.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.9.2",
     "react-query": "^2.23.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "twin.macro": "^1.10.0"
+    "twin.macro": "^1.10.0",
+    "yup": "^0.29.3"
   },
   "scripts": {
     "build:tailwind": "tailwind build src/assets/css/tailwind.css -o src/assets/css/main.css",

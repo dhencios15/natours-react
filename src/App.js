@@ -1,12 +1,18 @@
 import React, { lazy, Suspense } from 'react';
-import tw from 'twin.macro';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
+import tw from 'twin.macro';
 
 import Navbar from 'components/Navbar';
 import Spinner from 'components/Spinner';
+import Footer from 'components/Footer';
+import Login from 'pages/Login';
+import Signup from 'pages/Signup';
+import { AuthProvider } from 'context/authContext';
 const Layout = lazy(() => import('containers/Layout'));
 
+const AppWrapper = tw.div`min-h-screen md:m-1 bg-gray-800 md:rounded-lg overflow-hidden`;
 const queryCache = new QueryCache({
   defaultConfig: {
     queries: {
@@ -15,18 +21,29 @@ const queryCache = new QueryCache({
   },
 });
 
-const AppWrapper = tw.div`min-h-screen m-4 bg-gray-800 rounded-lg overflow-hidden`;
+const fetchDevTools = process.env.NODE_ENV === 'development' && (
+  <ReactQueryDevtools initialIsOpen />
+);
 
 function App() {
   return (
     <ReactQueryCacheProvider queryCache={queryCache}>
-      <AppWrapper>
-        <Navbar />
-        <Suspense fallback={<Spinner />}>
-          <Layout />
-          <ReactQueryDevtools initialIsOpen />
-        </Suspense>
-      </AppWrapper>
+      <AuthProvider>
+        <AppWrapper>
+          <Suspense fallback={<Spinner />}>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route path='/login' component={Login} />
+                <Route path='/signup' component={Signup} />
+                <Route path='/' component={Layout} />
+              </Switch>
+              <Footer />
+            </Router>
+            {fetchDevTools}
+          </Suspense>
+        </AppWrapper>
+      </AuthProvider>
     </ReactQueryCacheProvider>
   );
 }

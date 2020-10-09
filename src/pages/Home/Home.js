@@ -12,6 +12,8 @@ const Home = () => {
 
   if (error) return 'ERROR';
 
+  console.log();
+
   return (
     <ContentContainer>
       {isFetching && (
